@@ -18,6 +18,7 @@ void pop();
 void main() 
 {
     int choice;
+    stk s;
     
     do {
         clrscr();
