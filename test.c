@@ -1,26 +1,21 @@
 #include <stdio.h>
-#include <conio.h>
+#include "conio.h"
 
-void myfunction1();
-void myfunction2(int a, int b);
+int myadd(int a, int b);
 
 int main() 
 {
-    int n1 = 10;
-    int n2 = 20;
+    int res;
     
-    myfunction1();
-    myfunction2(n1, n2);
-    myfunction2(n1, 111);
-    myfunction2(n2, 222);
+    myadd(10, 30);
+    
+    res = myadd(40, 50);
+    
+    printf("%d\n", res);
+    
     getch();
 }
 
-void myfunction1() {
-    printf("HELLO MY FUNCTION1\n");
-}
-
-
-void myfunction2(int a, int b) {
-    printf("HELLO MY FUNCTION2 %d %d\n", a, b);
+int myadd(int a, int b) {
+    return a + b;
 }
