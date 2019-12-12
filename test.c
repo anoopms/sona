@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "conio.h"
 
+#define True 1
+
 int myadd(int a, int b);
 void push();
 void pop();
@@ -31,10 +33,8 @@ void main()
                 exit(0);
                 break;
         }
-        
-    } while(1);
-    
-    getch();
+        getch();
+    } while(True);
 }
 
 void push() {
