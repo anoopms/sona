@@ -2,6 +2,14 @@
 #include "conio.h"
 
 #define True 1
+#define False 0
+
+#define MAX 100
+
+typedef struct stack {
+    int item[MAX];
+    int top;
+}stk;
 
 int myadd(int a, int b);
 void push();
@@ -30,11 +38,10 @@ void main()
                 break;
             case 3:
                 printf("Choice 3\n");
-                exit(0);
                 break;
         }
         getch();
-    } while(True);
+    } while(choice != 3);
 }
 
 void push() {
