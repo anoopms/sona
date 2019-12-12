@@ -19,6 +19,9 @@ void main()
 {
     int choice;
     stk s;
+    str *sptr
+    
+    sptr = &s;
     
     do {
         clrscr();
@@ -42,7 +45,7 @@ void main()
                 break;
         }
         getch();
-    } while(choice != 3);
+    } while(True);
 }
 
 void push() {
