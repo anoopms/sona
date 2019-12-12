@@ -1,0 +1,4 @@
+void getch() {
+}
+void clrscr() {
+}
