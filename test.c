@@ -27,6 +27,7 @@ void main()
         printf("Enter the infix expression\n");
         scanf("%s", infix);
         infixToPostfix(&s, infix, postfix);
+        printf("%s", postfix);
     } while(infix[0] != '_');
 }
 
