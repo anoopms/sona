@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "conio.h"
 
 #define True 1
@@ -14,38 +15,24 @@ typedef struct stack {
 int myadd(int a, int b);
 void push();
 void pop();
+void infixToPostfix(stk *s, char *in, char *po);
 
 void main() 
 {
-    int choice;
+    char infix[MAX] = {0};
+    char postfix[MAX] = {0};
     stk s;
-    str *sptr
-    
-    sptr = &s;
     
     do {
-        clrscr();
-        printf("\n----Main Menu\n");
-        printf("1. Push\n");
-        printf("2. Pop\n");
-        printf("3. Exit\n");
-        printf("Enter yout choice\n");
-        scanf("%d",&choice);
-        switch (choice) {
-            case 1:
-                printf("Choice 1\n");
-                push();
-                break;
-            case 2:
-                printf("Choice 2\n");
-                pop();
-                break;
-            case 3:
-                printf("Choice 3\n");
-                break;
-        }
-        getch();
-    } while(True);
+        printf("Enter the infix expression\n");
+        scanf("%s", infix);
+        infixToPostfix(&s, infix, postfix);
+    } while(infix[0] != '_');
+}
+
+void infixToPostfix(stk *s, char *in, char *po) {
+    printf("infixToPostfix\n");
+    
 }
 
 void push() {
