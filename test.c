@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include <conio.h>
+#include "conio.h"
 
 #define True 1
 #define False 0
@@ -55,7 +55,7 @@ void infixToPostfix(stk *s, char *in, char *po) {
         {
             preStack = precedence(s->item[s->top]);
             preOp = precedence(in[i]);
-            while(preStack > preOp) 
+            while(preStack >= preOp) 
             {
                 po[j++] = pop(s);
                 preStack = precedence(s->item[s->top]);
@@ -108,6 +108,7 @@ int precedence(char op) {
         case '-':
             return 1;
     }
+    return 0;
 }
 
 void push(stk *s, int element) {
