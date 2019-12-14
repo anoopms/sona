@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "conio.h"
+#include <conio.h>
 
 #define True 1
 #define False 0
@@ -13,33 +13,131 @@ typedef struct stack {
 }stk;
 
 int myadd(int a, int b);
-void push();
-void pop();
+void push(stk *s, int element);
+int pop(stk *s);
+void createstack(stk *s);
 void infixToPostfix(stk *s, char *in, char *po);
+void printstack(stk *s);
+int isOperator(char op);
+int precedence(char op);
 
 void main() 
 {
     char infix[MAX] = {0};
     char postfix[MAX] = {0};
     stk s;
-    
+
+    createstack(&s);
+
     do {
         printf("Enter the infix expression\n");
         scanf("%s", infix);
         infixToPostfix(&s, infix, postfix);
-        printf("%s", postfix);
+        printf("POSTFIX %s\n", postfix);
     } while(infix[0] != '_');
 }
 
 void infixToPostfix(stk *s, char *in, char *po) {
-    printf("infixToPostfix\n");
-    
+    int i, j = 0, popped, preStack, preOp;
+
+    for (i = 0; i < strlen(in); i++) 
+    {
+        if(in[i] == ' ' || in[i] == '\t' || in[i] == ',') 
+        {
+            continue;
+        }
+        
+        if(in[i] == '(') {
+            push(s, in[i]);
+        }
+
+        else if (isOperator(in[i]))
+        {
+            preStack = precedence(s->item[s->top]);
+            preOp = precedence(in[i]);
+            while(preStack > preOp) 
+            {
+                po[j++] = pop(s);
+                preStack = precedence(s->item[s->top]);
+            }
+            push(s, in[i]);
+        }
+        else if(in[i] == ')')
+        {
+            popped = pop(s);
+            while(popped != '(') 
+            {
+                po[j++] = popped;
+                popped = pop(s);
+            }
+        }
+        else
+        {
+            po[j++] = in[i];
+        }
+    }
+
+    while(s->top != -1) {
+        po[j++] = pop(s);
+    }
+
+    po[j] = '\0';
 }
 
-void push() {
-    printf("Push\n");
+
+int isOperator(char op) {
+    switch (op) {
+        case '^':
+        case '+':
+        case '-':
+        case '/':
+        case '*':
+            return True;
+    }
+    return False;
 }
 
-void pop() {
-    printf("Pop\n");
+int precedence(char op) {
+    switch (op) {
+        case '^':
+            return 3;
+        case '/':
+        case '*':
+            return 2;
+        case '+':
+        case '-':
+            return 1;
+    }
+}
+
+void push(stk *s, int element) {
+    if(s->top ==  MAX - 1) {
+        printf("Overflow\n");
+    } else {
+        s->top = s->top + 1;
+        s->item[s->top] = element;
+    }
+}
+
+int pop(stk *s) {
+    int p;
+    if(s->top == -1) {
+        printf("Underflow");
+    } else {
+        p = s->item[s->top];
+        s->top = s->top - 1;
+    }
+    return p;
+}
+
+void createstack(stk *s) {
+    s->top = -1;
+}
+
+void printstack(stk *s) {
+    int i;
+    for (i = 0; i <= s->top; i++) {
+        printf("%c ", s->item[i]);
+    }
+    printf("\n");
 }
