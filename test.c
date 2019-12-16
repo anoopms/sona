@@ -46,7 +46,7 @@ void main()
 
 int evaluatePostfix(stk *s, char* postfix) {
     char op1, op2, res;
-    int i;
+    int i, intOper;
     char operand[2];
 
     createstack(s);
@@ -60,7 +60,8 @@ int evaluatePostfix(stk *s, char* postfix) {
         } else {
             operand[0] = postfix[i];
             operand[1] = '\0';
-            push(s, atoi(operand));
+            intOper = atoi(operand);
+            push(s, intOper);
         }
     }
     return s->item[0];
