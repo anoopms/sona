@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h> 
 #include "conio.h"
 
 #define True 1
@@ -20,12 +21,15 @@ void infixToPostfix(stk *s, char *in, char *po);
 void printstack(stk *s);
 int isOperator(char op);
 int precedence(char op);
+int operEvaluate(int op1, int op2, char operator);
+int evaluatePostfix(stk *s, char* postfix);
 
 void main() 
 {
     char infix[MAX] = {0};
     char postfix[MAX] = {0};
     stk s;
+    int final = 0;
 
     createstack(&s);
 
@@ -34,7 +38,52 @@ void main()
         scanf("%s", infix);
         infixToPostfix(&s, infix, postfix);
         printf("POSTFIX %s\n", postfix);
+        final = evaluatePostfix(&s, postfix);
+        printf("FINAL=%d\n", final);
+        
     } while(infix[0] != '_');
+}
+
+int evaluatePostfix(stk *s, char* postfix) {
+    char op1, op2, res;
+    int i;
+    char operand[2];
+
+    createstack(s);
+
+    for (i = 0; i < strlen(postfix); i++) {
+        if(isOperator(postfix[i])) {
+            op1 = pop(s);
+            op2 = pop(s);
+            res = operEvaluate(op1, op2, postfix[i]);
+            push(s, res);
+        } else {
+            operand[0] = postfix[i];
+            operand[1] = '\0';
+            push(s, atoi(operand));
+        }
+    }
+    return s->item[0];
+}
+
+int operEvaluate(int op1, int op2, char operator) {
+    int a, b, res = 0;
+    
+    switch (operator) {
+        case '+':
+            res = op1 + op2;
+            break;
+        case '-':
+            res = op1 - op2;
+            break;
+        case '/':
+            res = op1 / op2;
+            break;
+        case '*':
+            res = op1 * op2;
+            break;
+    }
+    return res;
 }
 
 void infixToPostfix(stk *s, char *in, char *po) {
