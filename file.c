@@ -11,19 +11,18 @@ int main()
 		printf("Cant open file one\n");
 		return 0;
 	}
-	
+
 	FILE *fTwo = fopen("/Users/anos2/learn/sona/two.txt", "r");
-	if(fTwo == NULL)	
-	{				
-		printf("Cant open file two\n");				
-		return 0;	
+	if(fTwo == NULL)
+	{
+		printf("Cant open file two\n");
+		return 0;
 	}
-	
 	FILE *fThree = fopen("/Users/anos2/learn/sona/three.txt", "w");
-	if(fThree == NULL)
-	{				
-		printf("Cant open file three\n");				
-		return 0;	
+	if(fThree == NULL)
+	{
+		printf("Cant open file three\n");
+		return 0;
 	}
 	
 	while(fgets(arr, 1000, fOne) != NULL)
@@ -32,7 +31,7 @@ int main()
 	}
 	
 	while(fgets(arr, 1000, fTwo) != NULL)
-	{		
+	{
 		fputs(arr, fThree);
 	}
 	
