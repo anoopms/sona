@@ -13,7 +13,7 @@ int main()
 	}
 	
 	fprintf(fp, "Anoop. Age=%d height=%d", 6, age);
-	printf("\n");
+	fprintf("\n");
 	fputs("Anoop. Age=age", fp);
 	return 0;
 }
