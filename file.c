@@ -20,20 +20,20 @@ int main()
 	}
 	
 	FILE *fThree = fopen("/Users/anos2/learn/sona/three.txt", "w");
-	if(fThree == NULL)	
+	if(fThree == NULL)
 	{				
 		printf("Cant open file three\n");				
 		return 0;	
 	}
 	
-	while(fgets(arr, 1000, fOne) != NULL) 
+	while(fgets(arr, 1000, fOne) != NULL)
 	{
 		fputs(arr, fThree);
 	}
 	
-	while(fgets(arr, 1000, fTwo) != NULL) 	
+	while(fgets(arr, 1000, fTwo) != NULL)
 	{		
-		fputs(arr, fThree);	
+		fputs(arr, fThree);
 	}
 	
 	fclose(fOne);
