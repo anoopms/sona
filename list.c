@@ -1,32 +1,62 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct _node {
     int value;
     struct _node *next;
 }node;
 
+node* createNode(int value);
+void deleteNode(node *addr);
+void insertNode(int value);
+void traverse();
 
-void main() 
+node *start = NULL;
+
+int main()
 {
-    struct _node nodeA;
-    node node1;
-    node node2;
     
-    node1.value = 10;
+    insertNode(10);
+    insertNode(20);
+    insertNode(30);
+    traverse();
     
-    struct _node *pNodeA;
-    node *pNode1;
-    
-    
-    pNodeA.value = 100; //WRONG
-    pNodeA->value = 100; //Error
-    
-    pNodeA = &node1;
-    pNodeA->value = 100 //Correct
-    
-    
-    pNodeA = malloc(sizeof(node));
-    pNodeA = 100; // Correct
-    
+    return 0;
 }
 
+void traverse()
+{
+    node *ptr;
+    ptr = start;
+    while(ptr != NULL)
+    {
+        printf("%d\n", ptr->value);
+        ptr = ptr->next;
+    }
+}
+
+void insertNode(int value) {
+    node *nptr;
+    nptr = createNode(value);
+    nptr->next = start;
+    start = nptr;
+}
+
+node* createNode(int value)
+{
+    node *newNode;
+    newNode = malloc(sizeof(node));
+    if(newNode == NULL)
+    {
+        printf("Not able to get memory\n");
+        return NULL;
+    }
+    newNode->value = value;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void deleteNode(node *addr)
+{
+    free(addr);
+}
